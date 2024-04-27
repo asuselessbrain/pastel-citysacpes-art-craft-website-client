@@ -1,42 +1,53 @@
 import { Link } from 'react-router-dom';
 import logo from '../assets/images/logo-removebg.png'
-import Lottie from "lottie-react";
-import signInLottie from "../assets/login.json"
-import { Fade } from "react-awesome-reveal";
-import { toast } from 'react-toastify';
 
-const SignIn = () => {
+const SignUp = () => {
+    const handleSignUp = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const name = form?.name.value;
+        const photoURL = form?.photoURL.value;
+        const email = form?.email.value;
+        const password = form?.password.value;
+        const confirmPassword = form?.confirmPassword.value;
+    }
     return (
+        <div>
 
-        <div className="gadgetContainer mt-10 md:mx-6">
-            <div className="flex md:justify-between items-center justify-center flex-wrap gap-4">
-                <img className="h-[100px]" src={logo} alt="" />
-                <div>
-                    Not a member?
-                    <Link
-                        className="px-3 ml-3 py-2 bg-[#FF497C] hover:bg-[#ab3154] rounded text-white font-semibold"
-                        to="/sign-up"
-                    >
-                        Sign Up
-                    </Link>
+            <div className="gadgetContainer mt-10 md:mx-6">
+                <div className="flex md:justify-between items-center justify-center flex-wrap gap-4">
+                    <img className="h-[100px]" src={logo} alt="" />
+                    <div>
+                        Already a member?
+                        <Link
+                            className="px-3 ml-3 py-2 bg-[#FF497C] hover:bg-[#ab3154] rounded text-white font-semibold"
+                            to="/sign-in"
+                        >
+                            Sign In
+                        </Link>
+                    </div>
                 </div>
-            </div>
-            <Fade duration={4000}>
+
                 <div className="border shadow-lg mt-10">
                     <div className="w-full  flex">
                         <div
                             className="w-full  bg-gray-400 hidden lg:block  bg-no-repeat  lg:w-1/2  rounded-l-lg "
-
+                            style={{
+                                // background: `url(${signUp})`,
+                                backgroundSize: "100% 100%",
+                                backgroundOrigin: "content-box",
+                            }}
                         >
-                            <Lottie style={{ width: '600px' }} loop={true} autoplay={true} animationData={signInLottie} />
+                            <p className="font-bold text-3xl mt-20 mx-6">
+                                We Offer the <br />
+                                Best Products
+                            </p>
                         </div>
 
                         <div className="w-full lg:w-1/2 bg-white p-5 rounded-lg lg:rounded-l-none">
                             <div className=" p-5 ">
                                 <div className="pb-8">
-                                    <p className="text-3xl font-bold mb-2">
-                                        Sign in to PastelCityscapes.
-                                    </p>
+                                    <p className="text-3xl font-bold mb-2">I'm New Here</p>
 
                                     <p className="font-semibold text-black/60">
                                         Enter your details below
@@ -95,6 +106,21 @@ const SignIn = () => {
                                     <div>
                                         <fieldset className="border border-solid border-gray-300 p-3 w-full rounded">
                                             <legend className=" font-medium text-black/60">
+                                                Name
+                                            </legend>
+                                            <input
+                                                type="text"
+                                                name="name"
+                                                id=""
+                                                placeholder="name"
+                                                className="px-4 py-1 w-full focus:outline-0"
+                                            />
+                                        </fieldset>
+                                    </div>
+
+                                    <div>
+                                        <fieldset className="border border-solid border-gray-300 p-3 w-full rounded">
+                                            <legend className=" font-medium text-black/60">
                                                 Email
                                             </legend>
                                             <input
@@ -115,25 +141,53 @@ const SignIn = () => {
                                                 type="password"
                                                 name="password"
                                                 id=""
-                                                placeholder="password"
+                                                placeholder="Password"
+                                                className="px-4 py-1 w-full focus:outline-0"
+                                            />
+                                        </fieldset>
+                                    </div>
+
+                                    <div>
+                                        <fieldset className="border border-solid border-gray-300 p-3 w-full rounded">
+                                            <legend className=" font-medium text-black/60">
+                                                Confirm Password
+                                            </legend>
+                                            <input
+                                                type="password"
+                                                name="confirmPassword"
+                                                id=""
+                                                placeholder="Confirm Password"
+                                                className="px-4 py-1 w-full focus:outline-0"
+                                            />
+                                        </fieldset>
+                                    </div>
+
+                                    <div>
+                                        <fieldset className="border border-solid border-gray-300 p-3 w-full rounded">
+                                            <legend className=" font-medium text-black/60">
+                                                PhotoURL
+                                            </legend>
+                                            <input
+                                                type="text"
+                                                name="photoURL"
+                                                id=""
+                                                placeholder="PhotoURL"
                                                 className="px-4 py-1 w-full focus:outline-0"
                                             />
                                         </fieldset>
                                     </div>
 
                                     <button className="px-3 py-2 bg-[#FF497C] hover:bg-[#ab3154] rounded text-white font-semibold">
-                                        Sign In
+                                        Sign Up
                                     </button>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
-            </Fade>
-
+            </div>
         </div>
-
     );
 };
 
-export default SignIn;
+export default SignUp;

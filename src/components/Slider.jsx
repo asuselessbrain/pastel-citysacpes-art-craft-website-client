@@ -36,7 +36,7 @@ const Slider = () => {
                                 {/* Style will be inherited from the parent element */}
                                 <Typewriter
                                     words={['Explore Gallery!']}
-                                    loop={100}
+                                    loop={1000}
                                     cursor
                                     cursorStyle='_'
                                     typeSpeed={70}
@@ -50,12 +50,12 @@ const Slider = () => {
                 <SwiperSlide>
                     <div className='slider slider2'>
                         <h1 className='text-white font-semibold text-5xl'>
-                            Canvas to Creativity: {' '}
+                            Canvas to Creativity, {' '}
                             <span style={{ color: 'red' }} className='font-extrabold text-6xl'>
                                 {/* Style will be inherited from the parent element */}
                                 <Typewriter
                                     words={['Find Inspiration!']}
-                                    loop={100}
+                                    loop={1000}
                                     cursor
                                     cursorStyle='_'
                                     typeSpeed={70}
@@ -74,7 +74,7 @@ const Slider = () => {
                                 {/* Style will be inherited from the parent element */}
                                 <Typewriter
                                     words={['Here Where to Start!"']}
-                                    loop={100}
+                                    loop={1000}
                                     cursor
                                     cursorStyle='_'
                                     typeSpeed={70}
@@ -93,7 +93,7 @@ const Slider = () => {
                                 {/* Style will be inherited from the parent element */}
                                 <Typewriter
                                     words={['Artistic Haven!']}
-                                    loop={100}
+                                    loop={1000}
                                     cursor
                                     cursorStyle='_'
                                     typeSpeed={70}
@@ -107,12 +107,12 @@ const Slider = () => {
                 <SwiperSlide>
                     <div className='slider slider5'>
                         <h1 className='text-white font-semibold text-5xl'>
-                            Color Your Imagination: {' '}
+                            Color Your Imagination, {' '}
                             <span style={{ color: 'red' }} className='font-extrabold text-6xl'>
                                 {/* Style will be inherited from the parent element */}
                                 <Typewriter
                                     words={['Start Today!']}
-                                    loop={100}
+                                    loop={1000}
                                     cursor
                                     cursorStyle='_'
                                     typeSpeed={70}
