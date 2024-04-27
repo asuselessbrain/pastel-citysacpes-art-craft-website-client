@@ -1,0 +1,28 @@
+.slider{
+    height: 90vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slider1{
+    background: url("../assets/images/slider1.jpg") center/cover;
+
+}
+.slider2{
+    background: url("../assets/images/slider2.jpg") center/cover;
+
+}
+.slider3{
+    background: url("../assets/images/slider3.jpg") center/cover;
+
+}
+.slider4{
+    background: url("../assets/images/slider4.jpg") center/cover;
+
+}
+.slider5{
+    background: url("../assets/images/slider5.jpg") center/cover;
+
+}
