@@ -4,8 +4,28 @@ import Lottie from "lottie-react";
 import signInLottie from "../assets/login.json"
 import { Fade } from "react-awesome-reveal";
 import { toast } from 'react-toastify';
+import { useContext } from 'react';
+import { AuthContext } from '../authProvider/AuthProvider';
 
 const SignIn = () => {
+
+    const { signInUser, googleSignUp, githubSignUp } = useContext(AuthContext)
+
+    const handleSignIn = async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const email = form?.email.value;
+        const password = form?.password.value;
+
+        try {
+            await signInUser(email, password);
+            toast.success("Login successful");
+        } catch (error) {
+            toast.error("Error signing in. Please try again.");
+        }
+
+
+    };
     return (
 
         <div className="gadgetContainer mt-10 md:mx-6">
@@ -45,6 +65,7 @@ const SignIn = () => {
 
                                 <div className="flex items-center flex-wrap md:flex-nowrap gap-4 mb-4">
                                     <button
+                                        onClick={() => googleSignUp()}
                                         className="w-full max-w-md font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline"
                                     >
                                         <div className="bg-white p-2 rounded-full">
@@ -71,6 +92,7 @@ const SignIn = () => {
                                     </button>
 
                                     <button
+                                        onClick={() => githubSignUp()}
                                         className="w-full max-w-md font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline"
                                     >
                                         <div className="bg-white p-1 rounded-full">
@@ -91,7 +113,7 @@ const SignIn = () => {
                                     </div>
                                 </div>
 
-                                <form className="space-y-3 w-full ">
+                                <form onSubmit={handleSignIn} className="space-y-3 w-full ">
                                     <div>
                                         <fieldset className="border border-solid border-gray-300 p-3 w-full rounded">
                                             <legend className=" font-medium text-black/60">

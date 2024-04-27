@@ -1,7 +1,14 @@
 import { Link } from 'react-router-dom';
 import logo from '../assets/images/logo-removebg.png'
+import { useContext } from 'react';
+import { AuthContext } from '../authProvider/AuthProvider';
+import { toast } from 'react-toastify';
 
 const SignUp = () => {
+
+    const { signUp } = useContext(AuthContext)
+
+
     const handleSignUp = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -10,6 +17,34 @@ const SignUp = () => {
         const email = form?.email.value;
         const password = form?.password.value;
         const confirmPassword = form?.confirmPassword.value;
+
+        signUp(email, password)
+        .then(result => console.log(result.user))
+
+        if (password !== confirmPassword) {
+            toast.error(
+                "Password didn't match"
+            )
+            return;
+        }
+
+        else if (
+            !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/.test(
+                password
+            )
+        ) {
+
+            toast.error(
+                "password must be have at least 6 characters,a capital & spacial letter,one number"
+            )
+            return;
+        }
+
+        // Email Validation
+        if (!/^\w+([.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+            toast.error("Please enter a valid email");
+            return;
+        }
     }
     return (
         <div>
@@ -102,7 +137,7 @@ const SignUp = () => {
                                     </div>
                                 </div>
 
-                                <form className="space-y-3 w-full ">
+                                <form onSubmit={handleSignUp} className="space-y-3 w-full ">
                                     <div>
                                         <fieldset className="border border-solid border-gray-300 p-3 w-full rounded">
                                             <legend className=" font-medium text-black/60">
