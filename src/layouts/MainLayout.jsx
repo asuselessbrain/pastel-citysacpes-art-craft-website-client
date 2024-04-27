@@ -5,7 +5,9 @@ import Navbar from "../components/sharedComponents/Navbar";
 const MainLayout = () => {
     return (
         <div>
-            <Navbar />
+            <div className="h-16">
+                <Navbar />
+            </div>
             <Outlet />
         </div>
     );
