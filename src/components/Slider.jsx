@@ -73,7 +73,7 @@ const Slider = () => {
                             <span style={{ color: 'red' }} className='font-extrabold text-6xl'>
                                 {/* Style will be inherited from the parent element */}
                                 <Typewriter
-                                    words={['Here Where to Start!"']}
+                                    words={['Here Where to Start!']}
                                     loop={1000}
                                     cursor
                                     cursorStyle='_'

@@ -1,15 +1,29 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import logo from '../assets/images/logo-removebg.png'
 import { useContext } from 'react';
 import { AuthContext } from '../authProvider/AuthProvider';
+import Lottie from "lottie-react";
+import signUpLottie from "../assets/register.json"
 import { toast } from 'react-toastify';
 
 const SignUp = () => {
 
-    const { signUp } = useContext(AuthContext)
+    const { signUp, googleSignUp, githubSignUp } = useContext(AuthContext)
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location?.state || "/"
+
+    const handleLogin = (provider) => {
+        provider().then((result) => {
+            if (result.user) {
+                navigate(from)
+            }
+        })
+    }
 
 
-    const handleSignUp = (e) => {
+    const handleSignUp = async (e) => {
         e.preventDefault();
         const form = e.target;
         const name = form?.name.value;
@@ -17,35 +31,45 @@ const SignUp = () => {
         const email = form?.email.value;
         const password = form?.password.value;
         const confirmPassword = form?.confirmPassword.value;
-
-        signUp(email, password)
-        .then(result => console.log(result.user))
-
-        if (password !== confirmPassword) {
-            toast.error(
-                "Password didn't match"
-            )
-            return;
+    
+        try {
+            // Call the signUp function and wait for the result
+            const result = await signUp(email, password);
+    
+            // If signing up is successful, log the user
+            toast.success("SignUp successful");
+            navigate(from)
+            console.log(result.user);
+    
+            // Check if password and confirmPassword match
+            if (password !== confirmPassword) {
+                toast.error("Passwords do not match");
+                return;
+            }
+    
+            // Validate password format
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+            if (!passwordRegex.test(password)) {
+                toast.error("Password must have at least 6 characters, a capital & special letter, and a number");
+                return;
+            }
+    
+            // Validate email format
+            const emailRegex = /^\w+([.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            if (!emailRegex.test(email)) {
+                toast.error("Please enter a valid email");
+                return;
+            }
+    
+            // If everything is valid, continue with sign-up process
+            // Additional logic for saving user data if needed
+        } catch (error) {
+            // Handle any errors that occur during sign-up process
+            console.error("Error signing up:", error.message);
+            toast.error("Error signing up. Please try again.");
         }
-
-        else if (
-            !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/.test(
-                password
-            )
-        ) {
-
-            toast.error(
-                "password must be have at least 6 characters,a capital & spacial letter,one number"
-            )
-            return;
-        }
-
-        // Email Validation
-        if (!/^\w+([.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
-            toast.error("Please enter a valid email");
-            return;
-        }
-    }
+    };
+    
     return (
         <div>
 
@@ -66,17 +90,9 @@ const SignUp = () => {
                 <div className="border shadow-lg mt-10">
                     <div className="w-full  flex">
                         <div
-                            className="w-full  bg-gray-400 hidden lg:block  bg-no-repeat  lg:w-1/2  rounded-l-lg "
-                            style={{
-                                // background: `url(${signUp})`,
-                                backgroundSize: "100% 100%",
-                                backgroundOrigin: "content-box",
-                            }}
+                            className="w-full  bg-gray-400 hidden lg:block  bg-no-repeat  lg:w-1/2  rounded-l-lg"
                         >
-                            <p className="font-bold text-3xl mt-20 mx-6">
-                                We Offer the <br />
-                                Best Products
-                            </p>
+                            <Lottie style={{ maxWidth: '500px', width: "100%", position: 'relative', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }} loop={true} autoplay={true} animationData={signUpLottie} />
                         </div>
 
                         <div className="w-full lg:w-1/2 bg-white p-5 rounded-lg lg:rounded-l-none">
@@ -91,6 +107,7 @@ const SignUp = () => {
 
                                 <div className="flex items-center flex-wrap md:flex-nowrap gap-4 mb-4">
                                     <button
+                                        onClick={() => handleLogin(googleSignUp)}
                                         className="w-full max-w-md font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline"
                                     >
                                         <div className="bg-white p-2 rounded-full">
@@ -117,6 +134,7 @@ const SignUp = () => {
                                     </button>
 
                                     <button
+                                        onClick={() => handleLogin(githubSignUp)}
                                         className="w-full max-w-md font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline"
                                     >
                                         <div className="bg-white p-1 rounded-full">

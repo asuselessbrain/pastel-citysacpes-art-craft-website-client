@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import logo from '../assets/images/logo-removebg.png'
 import Lottie from "lottie-react";
 import signInLottie from "../assets/login.json"
@@ -11,6 +11,21 @@ const SignIn = () => {
 
     const { signInUser, googleSignUp, githubSignUp } = useContext(AuthContext)
 
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location?.state || "/"
+
+    const handleLogin = (provider) => {
+        provider().then((result) => {
+            if (result.user) {
+                toast.success("Login successful");
+                navigate(from)
+            }
+        }).catch((error) => {
+            toast.error("Error signing in. Please try again.");
+        });
+    }
+
     const handleSignIn = async (e) => {
         e.preventDefault();
         const form = e.target;
@@ -20,6 +35,7 @@ const SignIn = () => {
         try {
             await signInUser(email, password);
             toast.success("Login successful");
+            navigate(from)
         } catch (error) {
             toast.error("Error signing in. Please try again.");
         }
@@ -44,13 +60,12 @@ const SignIn = () => {
             <Fade duration={4000}>
                 <div className="border shadow-lg mt-10">
                     <div className="w-full  flex">
-                        <div
+                    <div
                             className="w-full  bg-gray-400 hidden lg:block  bg-no-repeat  lg:w-1/2  rounded-l-lg "
 
                         >
-                            <Lottie style={{ width: '600px' }} loop={true} autoplay={true} animationData={signInLottie} />
+                            <Lottie style={{ maxWidth: '500px', width: "100%", margin: "auto" }} loop={true} autoplay={true} animationData={signInLottie} />
                         </div>
-
                         <div className="w-full lg:w-1/2 bg-white p-5 rounded-lg lg:rounded-l-none">
                             <div className=" p-5 ">
                                 <div className="pb-8">
@@ -65,7 +80,7 @@ const SignIn = () => {
 
                                 <div className="flex items-center flex-wrap md:flex-nowrap gap-4 mb-4">
                                     <button
-                                        onClick={() => googleSignUp()}
+                                        onClick={() => handleLogin(googleSignUp)}
                                         className="w-full max-w-md font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline"
                                     >
                                         <div className="bg-white p-2 rounded-full">
@@ -92,7 +107,7 @@ const SignIn = () => {
                                     </button>
 
                                     <button
-                                        onClick={() => githubSignUp()}
+                                        onClick={() => handleLogin(githubSignUp)}
                                         className="w-full max-w-md font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline"
                                     >
                                         <div className="bg-white p-1 rounded-full">
