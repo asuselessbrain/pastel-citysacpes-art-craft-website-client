@@ -1,10 +1,51 @@
+import { useContext } from 'react';
+import { AuthContext } from "../authProvider/AuthProvider";
+import { toast } from 'react-toastify';
 
 const AddCraftItem = () => {
+
+  const { user } = useContext(AuthContext)
+
+  const handleAddProduct = (e) => {
+
+
+    e.preventDefault();
+    const form = e.target;
+    const item_name = form.item_name.value;
+    const category_name = form.category_name.value;
+    const short_description = form.short_description.value;
+    const price = form.price.value;
+    const rating = form.rating.value;
+    const customization = form.customization.value;
+    const processing_time = form.processing_time.value;
+    const stock_status = form.stock_status.value;
+    const image = form.image.value;
+    const email = user.email
+
+    const addProduct = { item_name, category_name, short_description, price, rating, customization, processing_time, stock_status, image, email }
+
+    console.log(addProduct)
+
+    fetch("http://localhost:3000/add-craft-item", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(addProduct)
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data?.insertedId) {
+          toast.success("Craft item added successfulf!")
+        }
+      })
+  };
+
   return (
     <div className="bg-gray-100 dark:bg-gray-900 min-h-screen flex items-center justify-center">
       <div className="container mx-auto p-4 bg-white dark:bg-gray-800 shadow-lg rounded-md">
         <h1 className="text-3xl font-semibold mb-4 text-gray-800 dark:text-white">Add Craft Item</h1>
-        <form>
+        <form onSubmit={handleAddProduct}>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {/* Item Name */}
             <div>
