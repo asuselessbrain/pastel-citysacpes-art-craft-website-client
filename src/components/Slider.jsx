@@ -9,7 +9,7 @@ import './slider.css'
 import { Typewriter } from 'react-simple-typewriter'
 
 // import required modules
-import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import { Autoplay, Pagination } from 'swiper/modules';
 
 const Slider = () => {
     return (
@@ -24,8 +24,7 @@ const Slider = () => {
                 pagination={{
                     clickable: true,
                 }}
-                navigation={true}
-                modules={[Autoplay, Pagination, Navigation]}
+                modules={[Autoplay, Pagination]}
                 className="mySwiper"
             >
                 <SwiperSlide>
