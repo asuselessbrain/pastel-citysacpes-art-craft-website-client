@@ -1,19 +1,53 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../authProvider/AuthProvider";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const MyArtAndCraftList = () => {
     const { user } = useContext(AuthContext);
     const [items, setItems] = useState([]);
 
-
     useEffect(() => {
         if (user?.email) {
             fetch(`http://localhost:3000/myAddCraft/${user.email}`)
                 .then(res => res.json())
-                .then(data => setItems(data))
+                .then(data => {
+                    setItems(data);
+                })
+                .catch(error => console.error('Error fetching data:', error));
         }
-    }, [user])
+    }, [user]);
+
+    const handleDelete = (_id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:3000/add-craft-item/${_id}`, {
+                    method: 'DELETE'
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.deletedCount > 0) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            });
+                            // Update items state by filtering out the deleted item
+                            setItems(prevItems => prevItems.filter(item => item._id !== _id));
+                        }
+                    })
+                    .catch(error => console.error('Error deleting item:', error));
+            }
+        });
+    }
 
     return (
         <div>
@@ -41,7 +75,7 @@ const MyArtAndCraftList = () => {
                                     Update
                                 </button></Link>
 
-                                <button className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                                <button onClick={() => handleDelete(item._id)} className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                                     Delete
                                 </button>
                             </div>
