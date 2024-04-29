@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
 const AllArtAndCraft = () => {
     const craftItems = useLoaderData();
@@ -24,6 +24,18 @@ const AllArtAndCraft = () => {
                             <p className="mb-4"><span className="font-bold text-gray-700">Rating:</span> {item.rating}</p>
                             <p className="mb-4"><span className="font-bold text-gray-700">Processing Time:</span> {item.processing_time}</p>
                             <p className="mb-4"><span className="font-bold text-gray-700">Stock Status:</span> <span className="text-white bg-green-500 p-1 rounded-full px-3 ml-2">{item.stock_status}</span></p>
+                        </div>
+                        <div className="ml-6 mb-6">
+                            <Link to={`/view-details/${item._id}`}>
+                                <button className="transition flex-1 ease-in duration-300 bg-gray-700 hover:bg-gray-800 border hover:border-gray-500 border-gray-700 hover:text-white  hover:shadow-lg text-white rounded py-2 md:py-1 text-center  flex justify-center items-center px-4 font-medium text-sm">
+                                    <span className=" mr-2">
+                                        <i className="bx bxs-low-vision"></i>
+                                    </span>
+
+                                    <span>Details</span>
+                                </button>
+
+                            </Link>
                         </div>
                     </div>
                 ))}

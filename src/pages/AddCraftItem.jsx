@@ -43,9 +43,9 @@ const AddCraftItem = () => {
   };
 
   return (
-    <div className="bg-gray-100 dark:bg-gray-900 min-h-screen flex items-center justify-center">
+    <div className="bg-gray-100 dark:bg-gray-900 min-h-screen pt-6 flex items-center justify-center">
       <div className="container mx-auto p-4 bg-white dark:bg-gray-800 shadow-lg rounded-md">
-        <h1 className="text-3xl font-semibold mb-4 text-gray-800 dark:text-white">Add Craft Item</h1>
+        <h1 className="text-3xl font-semibold mb-4 text-center text-gray-800 dark:text-white">Add Craft Item</h1>
         <form onSubmit={handleAddProduct}>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {/* Item Name */}

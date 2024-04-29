@@ -10,6 +10,7 @@ import PrivateRouts from "../components/privateRoutes/PrivateRouts";
 import MyArtAndCraftList from "../pages/MyArtAndCraftList";
 import AllArtAndCraft from "../pages/AllArtAndCraft";
 import ViewCraft from "../pages/ViewCraft";
+import UpdateItem from "../pages/UpdateItem";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,13 @@ const router = createBrowserRouter([
         element: <PrivateRouts>
           <MyArtAndCraftList />
         </PrivateRouts>
+      },
+      {
+        path: "/update-item/:id",
+        element: <PrivateRouts>
+          <UpdateItem />
+        </PrivateRouts>,
+        loader: ({params}) => fetch(`http://localhost:3000/updateItem/${params.id}`)
       },
       {
         path: "/sign-in",

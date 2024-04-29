@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../authProvider/AuthProvider";
+import { Link } from "react-router-dom";
 
 const MyArtAndCraftList = () => {
     const { user } = useContext(AuthContext);
@@ -36,9 +37,9 @@ const MyArtAndCraftList = () => {
                             </div>
 
                             <div className="flex items-center space-x-6 ml-6 mb-4">
-                                <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                                <Link to={`/update-item/${item._id}`}><button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                                     Update
-                                </button>
+                                </button></Link>
 
                                 <button className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                                     Delete
