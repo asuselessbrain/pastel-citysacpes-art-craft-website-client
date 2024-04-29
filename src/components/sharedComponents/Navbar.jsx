@@ -65,7 +65,7 @@ const Navbar = () => {
 
                         <li>
                             <NavLink
-                                to="/add-product"
+                                to="/my-art-and-craft-list"
                                 className={({ isActive }) =>
                                     isActive ? "text-[#FF497C] border-b-4 border-[#FF497C]"
                                         : "hover:text-[#FF497C]"
@@ -92,7 +92,7 @@ const Navbar = () => {
                     </li>
                     <li>
                         <NavLink
-                            to="/add-product"
+                            to="/all-art-and-craft"
                             className={({ isActive }) =>
                                 isActive ? "text-[#FF497C] border-b-4 border-[#FF497C]"
                                     : "hover:text-[#FF497C]"
@@ -114,7 +114,7 @@ const Navbar = () => {
 
                     <li>
                         <NavLink
-                            to="/add-product"
+                            to="/my-art-and-craft-list"
                             className={({ isActive }) =>
                                 isActive ? "text-[#FF497C] border-b-4 border-[#FF497C]"
                                     : "hover:text-[#FF497C]"

@@ -20,9 +20,10 @@ const AddCraftItem = () => {
     const processing_time = form.processing_time.value;
     const stock_status = form.stock_status.value;
     const image = form.image.value;
-    const email = user.email
+    const email = user.email;
+    const userName = user.displayName;
 
-    const addProduct = { item_name, category_name, short_description, price, rating, customization, processing_time, stock_status, image, email }
+    const addProduct = { item_name, category_name, short_description, price, rating, customization, processing_time, stock_status, image, email, userName }
 
     console.log(addProduct)
 
