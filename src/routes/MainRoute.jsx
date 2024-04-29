@@ -9,7 +9,6 @@ import AddCraftItem from "../pages/AddCraftItem";
 import PrivateRouts from "../components/privateRoutes/PrivateRouts";
 import MyArtAndCraftList from "../pages/MyArtAndCraftList";
 import AllArtAndCraft from "../pages/AllArtAndCraft";
-import CraftItems from "../components/CraftItems";
 import ViewCraft from "../pages/ViewCraft";
 
 const router = createBrowserRouter([

@@ -1,93 +1,34 @@
-import { Link, useLoaderData } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 
 const AllArtAndCraft = () => {
     const craftItems = useLoaderData();
 
     return (
-        <div className="grid xl:grid-cols-2 grid-cols-1 gap-4 mt-10">
-            {craftItems.map(item => (
-                <div key={item._id} className="w-full bg-white border shadow-lg rounded-xl p-6 dark:bg-[#1a2641d5]">
-                    <div className="flex flex-col">
-                        <div className="relative h-62 w-full mb-3">
-                            <div className="absolute flex flex-col top-0 right-0 p-3">
-                                {/* Whitelist btn */}
-                                <button className="transition ease-in duration-300 bg-gray-800  hover:text-[#FF497C] shadow hover:shadow-md text-gray-500 rounded-full w-8 h-8 text-center p-1">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        className="h-6 w-6"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth="2"
-                                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                                        />
-                                    </svg>
-                                </button>
-                            </div>
-                            {/* product image */}
-                            <div className="h-[180px] w-full rounded-2xl dark:bg-[#0F172A]">
-                                <img
-                                    src={item.image}
-                                    alt=""
-                                    className="w-full h-full object-fill rounded-2xl"
-                                />
-                            </div>
+
+        <div>
+            <h2 className="font-extrabold text-black dark:text-white mt-8 text-5xl mb-10 text-center">All Art & Craft Items</h2>
+            <p className="text-center container mx-auto my-6 mb-10">Step into a world of creativity and imagination with our curated selection of art and craft items. From handmade pottery to intricately woven textiles, each piece celebrates the artistry of talented artisans worldwide. Whether you are decorating your home or searching for the perfect gift, our diverse collection offers something for every taste and occasion. Explore our gallery to discover unique creations that tell stories of tradition, innovation, and human expression. Join us on a journey of discovery and wonder as you explore the vibrant world of art and craft. Welcome to our sanctuary of creativity!</p>
+            <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 container mx-auto">
+
+                {craftItems.map((item) => (
+                    <div key={item._id} className="relative flex flex-col text-gray-700 bg-white shadow-md bg-clip-border dark:text-white dark:bg-gray-500 rounded-xl">
+                        <div className="relative h-56 overflow-hidden text-white shadow-lg bg-clip-border rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40">
+                            <img src={item.image} alt="card-image" />
                         </div>
-                        <div className="flex-auto justify-evenly">
-                            <div className="flex flex-wrap">
-                                <div className="w-full flex-none text-sm flex items-center text-gray-800 dark:text-gray-300">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        className="h-4 w-4 text-red-500 mr-1"
-                                        viewBox="0 0 20 20"
-                                        fill="currentColor"
-                                    >
-                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                    </svg>
-                                    <span className="text-gray-600 dark:text-gray-300 whitespace-nowrap mr-3">
-                                        {item.rating} {/* Assuming `rating` is a property of each item */}
-                                    </span>
-                                    <span className="mr-2 text-gray-600 dark:text-gray-300">
-                                        {item.item_name} {/* Assuming `item_name` is a property of each item */}
-                                    </span>
-                                </div>
-                                {/* product name */}
-                                <div className="flex items-center w-full justify-between min-w-0 ">
-                                    <h2 className="text-lg mr-auto cursor-pointer text-gray-800 hover:text-[#FF497C] truncate font-semibold dark:text-white mt-5">
-                                        {item.category_name} {/* Assuming `category_name` is a property of each item */}
-                                    </h2>
-                                    <div className="flex items-center bg-green-400 text-white text-xs px-2 py-1 ml-3 rounded-lg">
-                                        INSTOCK
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <p className="text-sm text-gray-500 dark:text-gray-300 my-2">Type : {item.stock_status} {/* Assuming `stock_status` is a property of each item */}</p>
-                            </div>
-                            <div className="text-lg text-gray-500 font-semibold mt-1">
-                                Price : {item.price} {/* Assuming `price` is a property of each item */}
-                            </div>
-
-                            <Link to={`/view-details/${item._id}`}>
-                                <button className="transition flex-1 ease-in duration-300 bg-gray-700 hover:bg-gray-800 border hover:border-gray-500 border-gray-700 hover:text-white  hover:shadow-lg text-white rounded py-2 md:py-1 text-center  flex justify-center items-center px-4 font-medium text-sm">
-                                    <span className=" mr-2">
-                                        <i className="bx bxs-low-vision"></i>
-                                    </span>
-
-                                    <span>Details</span>
-                                </button>
-                            </Link>
+                        <div className="p-6">
+                            <h5 className="block mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
+                                {item.item_name}
+                            </h5>
+                            <p className="mb-4"><span className="font-bold text-gray-700">Category:</span> {item.category_name}</p>
+                            <p className="mb-4"><span className="font-bold text-gray-700">Price:</span> <span className="text-red-500">{item.price}</span></p>
+                            <p className="mb-4"><span className="font-bold text-gray-700">Rating:</span> {item.rating}</p>
+                            <p className="mb-4"><span className="font-bold text-gray-700">Processing Time:</span> {item.processing_time}</p>
+                            <p className="mb-4"><span className="font-bold text-gray-700">Stock Status:</span> <span className="text-white bg-green-500 p-1 rounded-full px-3 ml-2">{item.stock_status}</span></p>
                         </div>
                     </div>
-                </div>
-
-            ))
-            }
-        </div >
+                ))}
+            </div>
+        </div>
     );
 };
 

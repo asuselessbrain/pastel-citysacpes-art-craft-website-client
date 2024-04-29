@@ -1,7 +1,7 @@
 import { Link, useLoaderData } from "react-router-dom";
 import Slider from "../components/Slider";
 import CraftItems from "../components/CraftItems";
-import AllArtAndCraft from "./AllArtAndCraft";
+import ArtAndCraftCategories from "../components/ArtAndCraftCategories";
 
 const Home = () => {
     const craftItems = useLoaderData();
@@ -12,7 +12,9 @@ const Home = () => {
     return (
         <div>
             <Slider />
-            <div className="grid xl:grid-cols-2 grid-cols-1 gap-4 mt-10">
+
+            <ArtAndCraftCategories />
+            <div className="grid xl:grid-cols-3 grid-cols-2 gap-10 mt-10 container mx-auto">
                 {displayItems.map(item => (
                     <CraftItems key={item._id} item={item} />
                 ))}
