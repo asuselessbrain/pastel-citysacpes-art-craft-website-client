@@ -14,7 +14,6 @@ const MyArtAndCraftList = () => {
                 .then(data => {
                     setItems(data);
                 })
-                .catch(error => console.error('Error fetching data:', error));
         }
     }, [user]);
 
@@ -37,14 +36,12 @@ const MyArtAndCraftList = () => {
                         if (data.deletedCount > 0) {
                             Swal.fire({
                                 title: "Deleted!",
-                                text: "Your file has been deleted.",
+                                text: "Your item has been deleted.",
                                 icon: "success"
                             });
-                            // Update items state by filtering out the deleted item
                             setItems(prevItems => prevItems.filter(item => item._id !== _id));
                         }
                     })
-                    .catch(error => console.error('Error deleting item:', error));
             }
         });
     }
