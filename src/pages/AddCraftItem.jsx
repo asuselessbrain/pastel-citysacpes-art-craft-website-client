@@ -22,11 +22,10 @@ const AddCraftItem = () => {
 
     const addProduct = { item_name, category_name, short_description, price, rating, customization, processing_time, stock_status, image, email, userName };
 
-    fetch("https://art-and-craft-server-ten.vercel.app/add-craft-item", {
+    fetch("https://backend-omega-snowy.vercel.app/add-craft-item", {
       method: "POST",
       headers: {
-        "Content-type": "application/json",
-        "Access-Control-Allow-Origin": "http://localhost:5173/"
+        "Content-type": "application/json"
       },
       body: JSON.stringify(addProduct)
     })

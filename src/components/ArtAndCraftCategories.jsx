@@ -4,7 +4,7 @@ const ArtAndCraftCategories = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetch("https://art-and-craft-server-ten.vercel.app/category")
+    fetch("https://backend-omega-snowy.vercel.app/category")
       .then((response) => response.json())
       .then((data) => setCategories(data))
       .catch((error) => console.error("Error fetching data:", error));

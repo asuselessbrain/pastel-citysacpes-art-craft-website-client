@@ -10,7 +10,7 @@ const MyArtAndCraftList = () => {
 
     useEffect(() => {
         if (user?.email) {
-            fetch(`https://art-and-craft-server-ten.vercel.app/myAddCraft/${user.email}`)
+            fetch(`https://backend-omega-snowy.vercel.app/myAddCraft/${user.email}`)
                 .then(res => res.json())
                 .then(data => {
                     setItems(data);
@@ -29,7 +29,7 @@ const MyArtAndCraftList = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`https://art-and-craft-server-ten.vercel.app/add-craft-item/${_id}`, {
+                fetch(`https://backend-omega-snowy.vercel.app/add-craft-item/${_id}`, {
                     method: 'DELETE'
                 })
                     .then(res => res.json())
@@ -54,7 +54,7 @@ const MyArtAndCraftList = () => {
     useEffect(() => {
         const fetchItems = async () => {
 
-            const response = await fetch(`https://art-and-craft-server-ten.vercel.app/myAddCraft/${email}/customization/${customization}`);
+            const response = await fetch(`https://backend-omega-snowy.vercel.app/${email}/customization/${customization}`);
             const data = await response.json();
             setItems(data);
 

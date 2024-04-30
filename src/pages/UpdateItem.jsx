@@ -2,30 +2,28 @@ import { useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const UpdateItem = () => {
+    const item = useLoaderData();
 
-    const item = useLoaderData()
-
-    const { _id, item_name, category_name, short_description, price, rating, customization, processing_time, stock_status, image } = item
-
+    const { item_name, category_name, short_description, price, rating, customization, processing_time, stock_status, image, email, userName } = item
 
     const handleUpdate = e => {
         e.preventDefault();
 
         const form = e.target;
-        const item_name = form.item_name.value;
-        const category_name = form.category_name.value;
-        const short_description = form.short_description.value;
-        const price = form.price.value;
-        const rating = form.rating.value;
-        const customization = form.customization.value;
-        const processing_time = form.processing_time.value;
-        const stock_status = form.stock_status.value;
-        const image = form.image.value;
 
-        const updatedProduct = { item_name, category_name, short_description, price, rating, customization, processing_time, stock_status, image }
+        const updatedProduct = {
+            item_name: form.item_name.value,
+            category_name: form.category_name.value,
+            short_description: form.short_description.value,
+            price: form.price.value,
+            rating: form.rating.value,
+            customization: form.customization.value,
+            processing_time: form.processing_time.value,
+            stock_status: form.stock_status.value,
+            image: form.image.value
+        };
 
-
-        fetch(`https://art-and-craft-server-ten.vercel.app/add-craft-item/${_id}`, {
+        fetch(`https://backend-omega-snowy.vercel.app/add-craft-item/${item._id}`, {
             method: "PUT",
             headers: {
                 "Content-type": "application/json"
@@ -34,17 +32,20 @@ const UpdateItem = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+                console.log(data);
                 if (data?.modifiedCount > 0) {
                     Swal.fire({
-                        title: 'success',
+                        title: 'Success',
                         text: 'Updated Successful',
                         icon: 'success',
                         confirmButtonText: 'Ok'
-                      })
+                    });
                 }
             })
-    }
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    };
     return (
         <div className="bg-gray-100 dark:bg-gray-900 min-h-screenpt-6 flex items-center justify-center">
             <div className="container mx-auto p-4 bg-white dark:bg-gray-800 shadow-lg rounded-md">

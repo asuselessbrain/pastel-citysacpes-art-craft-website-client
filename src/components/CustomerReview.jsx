@@ -14,7 +14,7 @@ const CustomerReview = () => {
     const [reviews, setReviews] = useState([])
 
     useEffect(() => {
-        fetch('https://art-and-craft-server-ten.vercel.app/customerReview')
+        fetch('https://backend-omega-snowy.vercel.app/customerReview')
             .then(res => res.json())
             .then(data => {
                 setReviews(data);

@@ -6,6 +6,8 @@ const ViewCraft = () => {
 
     const { item_name, category_name, short_descriptio, price, rating, customization, processing_time, stock_status, image } = craft;
 
+
+
     return (
         <div className="flex justify-center items-center h-screen">
             <div className="max-w-5xl mx-auto px-4 py-8">

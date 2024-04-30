@@ -22,7 +22,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
-        loader: () => fetch('https://art-and-craft-server-ten.vercel.app/craftItems')
+        loader: () => fetch('https://backend-omega-snowy.vercel.app/craftItems')
       },
       {
         path: '/add-craft-item',
@@ -41,7 +41,7 @@ const router = createBrowserRouter([
         element: <PrivateRouts>
           <UpdateItem />
         </PrivateRouts>,
-        loader: ({params}) => fetch(`https://art-and-craft-server-ten.vercel.app/${params.id}`)
+        loader: ({params}) => fetch(`http://localhost:3000/singleProduct/${params.id}`)
       },
       {
         path: "/sign-in",
@@ -54,14 +54,14 @@ const router = createBrowserRouter([
       {
         path: "/all-art-and-craft",
         element: <AllArtAndCraft />,
-        loader: () => fetch('https://art-and-craft-server-ten.vercel.app/craftItems')
+        loader: () => fetch('https://backend-omega-snowy.vercel.app/craftItems')
       },
       {
         path: "/view-details/:id",
         element: <PrivateRouts>
           <ViewCraft />
         </PrivateRouts>,
-        loader: ({ params }) => fetch(`https://art-and-craft-server-ten.vercel.app/${params.id}`)
+        loader: ({ params }) => fetch(`http://localhost:3000/craftItems/${params.id}`)
       }
     ],
   }
