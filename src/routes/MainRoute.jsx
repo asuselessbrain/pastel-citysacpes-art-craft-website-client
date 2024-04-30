@@ -41,7 +41,7 @@ const router = createBrowserRouter([
         element: <PrivateRouts>
           <UpdateItem />
         </PrivateRouts>,
-        loader: ({params}) => fetch(`http://localhost:3000/singleProduct/${params.id}`)
+        loader: ({params}) => fetch(`https://backend-omega-snowy.vercel.app/singleProduct/${params.id}`)
       },
       {
         path: "/sign-in",
