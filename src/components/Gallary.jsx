@@ -10,7 +10,7 @@ const GallerySection = () => {
     const [gallery, setGallery] = useState([])
 
     useEffect(() => {
-        fetch('http://localhost:3000/gallery')
+        fetch('https://art-and-craft-server-ten.vercel.app/gallery')
             .then(res => res.json())
             .then(data => {
                 setGallery(data);

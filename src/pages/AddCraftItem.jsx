@@ -3,12 +3,9 @@ import { AuthContext } from "../authProvider/AuthProvider";
 import { toast } from 'react-toastify';
 
 const AddCraftItem = () => {
-
-  const { user } = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
 
   const handleAddProduct = (e) => {
-
-
     e.preventDefault();
     const form = e.target;
     const item_name = form.item_name.value;
@@ -23,25 +20,26 @@ const AddCraftItem = () => {
     const email = user.email;
     const userName = user.displayName;
 
-    const addProduct = { item_name, category_name, short_description, price, rating, customization, processing_time, stock_status, image, email, userName }
+    const addProduct = { item_name, category_name, short_description, price, rating, customization, processing_time, stock_status, image, email, userName };
 
-    console.log(addProduct)
-
-    fetch("http://localhost:3000/add-craft-item", {
+    fetch("https://art-and-craft-server-ten.vercel.app/add-craft-item", {
       method: "POST",
       headers: {
-        "Content-type": "application/json"
+        "Content-type": "application/json",
+        "Access-Control-Allow-Origin": "http://localhost:5173/"
       },
       body: JSON.stringify(addProduct)
     })
       .then(res => res.json())
       .then(data => {
-        if (data?.insertedId) {
-          toast.success("Craft item added successfulf!")
-          form.reset()
+        console.log(data)
+        if (data.insertedId) {
+          toast.success("Craft item added successfully!");
+        } else {
+          toast.error("Failed to add craft item. Please try again later.");
         }
       })
-  };
+  }
 
   return (
     <div className="bg-gray-100 dark:bg-gray-900 min-h-screen pt-6 flex items-center justify-center">
@@ -116,9 +114,6 @@ const AddCraftItem = () => {
         </form>
       </div>
     </div>
-
-
-
   );
 };
 

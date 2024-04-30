@@ -3,6 +3,7 @@ import Slider from "../components/Slider";
 import CraftItems from "../components/CraftItems";
 import ArtAndCraftCategories from "../components/ArtAndCraftCategories";
 import Gallary from "../components/Gallary";
+import CustomerReview from "../components/CustomerReview";
 
 const Home = () => {
     const craftItems = useLoaderData();
@@ -34,6 +35,8 @@ const Home = () => {
             )}
 
             <Gallary />
+
+            <CustomerReview />
         </div>
     );
 };

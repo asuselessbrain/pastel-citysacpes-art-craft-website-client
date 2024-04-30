@@ -11,16 +11,18 @@ import MyArtAndCraftList from "../pages/MyArtAndCraftList";
 import AllArtAndCraft from "../pages/AllArtAndCraft";
 import ViewCraft from "../pages/ViewCraft";
 import UpdateItem from "../pages/UpdateItem";
+import PageNotFound from "../pages/PageNotFound";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
+    errorElement: <PageNotFound />,
     children: [
       {
         path: "/",
         element: <Home />,
-        loader: () => fetch('http://localhost:3000/craftItems')
+        loader: () => fetch('https://art-and-craft-server-ten.vercel.app/craftItems')
       },
       {
         path: '/add-craft-item',
@@ -39,7 +41,7 @@ const router = createBrowserRouter([
         element: <PrivateRouts>
           <UpdateItem />
         </PrivateRouts>,
-        loader: ({params}) => fetch(`http://localhost:3000/updateItem/${params.id}`)
+        loader: ({params}) => fetch(`https://art-and-craft-server-ten.vercel.app/${params.id}`)
       },
       {
         path: "/sign-in",
@@ -52,17 +54,17 @@ const router = createBrowserRouter([
       {
         path: "/all-art-and-craft",
         element: <AllArtAndCraft />,
-        loader: () => fetch('http://localhost:3000/craftItems')
+        loader: () => fetch('https://art-and-craft-server-ten.vercel.app/craftItems')
       },
       {
         path: "/view-details/:id",
         element: <PrivateRouts>
           <ViewCraft />
         </PrivateRouts>,
-        loader: ({ params }) => fetch(`http://localhost:3000/craftItems/${params.id}`)
+        loader: ({ params }) => fetch(`https://art-and-craft-server-ten.vercel.app/${params.id}`)
       }
     ],
-  },
+  }
 ]);
 
 export default router;

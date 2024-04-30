@@ -25,7 +25,7 @@ const UpdateItem = () => {
         const updatedProduct = { item_name, category_name, short_description, price, rating, customization, processing_time, stock_status, image }
 
 
-        fetch(`http://localhost:3000/add-craft-item/${_id}`, {
+        fetch(`https://art-and-craft-server-ten.vercel.app/add-craft-item/${_id}`, {
             method: "PUT",
             headers: {
                 "Content-type": "application/json"

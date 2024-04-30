@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 
 const SignUp = () => {
 
-    const { signUp, googleSignUp, githubSignUp } = useContext(AuthContext)
+    const { signUp, googleSignUp, updateUserProfile, githubSignUp } = useContext(AuthContext)
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -31,45 +31,41 @@ const SignUp = () => {
         const email = form?.email.value;
         const password = form?.password.value;
         const confirmPassword = form?.confirmPassword.value;
-    
+
         try {
-            // Call the signUp function and wait for the result
             const result = await signUp(email, password);
-    
-            // If signing up is successful, log the user
+
+
+            updateUserProfile(name, photoURL)
             toast.success("SignUp successful");
             navigate(from)
+
+
             console.log(result.user);
-    
-            // Check if password and confirmPassword match
+
             if (password !== confirmPassword) {
                 toast.error("Passwords do not match");
                 return;
             }
-    
-            // Validate password format
+
             const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
             if (!passwordRegex.test(password)) {
                 toast.error("Password must have at least 6 characters, a capital & special letter, and a number");
                 return;
             }
-    
-            // Validate email format
+
             const emailRegex = /^\w+([.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
             if (!emailRegex.test(email)) {
                 toast.error("Please enter a valid email");
                 return;
             }
-    
-            // If everything is valid, continue with sign-up process
-            // Additional logic for saving user data if needed
+
         } catch (error) {
-            // Handle any errors that occur during sign-up process
             console.error("Error signing up:", error.message);
             toast.error("Error signing up. Please try again.");
         }
     };
-    
+
     return (
         <div>
 

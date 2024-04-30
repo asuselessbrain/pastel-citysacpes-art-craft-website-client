@@ -4,14 +4,14 @@ const ArtAndCraftCategories = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/category")
+    fetch("https://art-and-craft-server-ten.vercel.app/category")
       .then((response) => response.json())
       .then((data) => setCategories(data))
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
 
   return (
-    <div className="bg-gray-100 py-12">
+    <div className="bg-gray-100 py-12 dark:bg-gray-700">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-semibold text-center mb-8">Art & Craft Categories</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
