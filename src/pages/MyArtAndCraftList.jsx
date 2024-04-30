@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 const MyArtAndCraftList = () => {
     const { user } = useContext(AuthContext);
     const [items, setItems] = useState([]);
+    const [customization, setCustomization] = useState('');
 
     useEffect(() => {
         if (user?.email) {
@@ -46,9 +47,43 @@ const MyArtAndCraftList = () => {
         });
     }
 
+    const email = user.email;
+
+    console.log(email)
+
+    useEffect(() => {
+        const fetchItems = async () => {
+
+            const response = await fetch(`http://localhost:3000/myAddCraft/${email}/customization/${customization}`);
+            const data = await response.json();
+            setItems(data);
+
+        };
+
+        if (email) {
+            fetchItems();
+        }
+    }, [email, customization]);
+
+
+    const handleCustomizationChange = (e) => {
+        setCustomization(e.target.value);
+    };
+    console.log(customization)
+
+
     return (
         <div>
             <h2 className="font-extrabold text-black dark:text-white mt-8 text-5xl mb-10 text-center">All Art & Craft Items</h2>
+
+            <div className="text-center mb-8 text-xl font-semibold">
+                <label htmlFor="customization">Filter by Customization:</label>
+                <select id="customization" className="py-2 px-4 ml-2 bg-green-400 rounded-md text-white" value={customization} onChange={handleCustomizationChange}>
+                    <option value="">Customization</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 container mx-auto">
                 {items.map(item => (
